@@ -10,17 +10,17 @@ subscriber:connect("tcp://localhost:5556")
 subscriber:setopt(zmq.SUBSCRIBE, "")
 
 cantados = {}
+bingo = {}
+random = 75
 
 math.randomseed(os.time())
 
-function fueCantada(numero)
-	 for i=1 , #cantados do
-	 	if cantados[i]==numero then
-	 		return true
-	 	end	
-	 end
-	 return false
-end	
+function cargarbolas()
+ for i =1, 75 do
+  bingo[#bingo+1]=i
+ end
+end 
+
 
 function insertarCantados(numero)
    cantados[#cantados+1]= numero
@@ -37,25 +37,25 @@ function imprimirCantados()
 end	
 
 function generarBola()
-	local valor
-	band = true
-	while band do
-		valor  = math.random(1, 75)
-		if fueCantada(valor)==false then
-			insertarCantados(valor)
-			band=false
-        end
-	end
+	
+		espacio  = math.random(1, random)
+    bolita = bingo[espacio]
+    insertarCantados(bolita)
+    table.remove(bingo, espacio)
+    random = random -1
 
-	return valor	
+
+    return bolita
+	
 end
 
 local jugar = true
+cargarbolas()
 
 while jugar do
-    s_sleep(2000)
+    s_sleep(1000)
     local bola
-    bola     = generarBola()
+    bola  = generarBola()
     publisher:send(""..bola)
     imprimirCantados()
 

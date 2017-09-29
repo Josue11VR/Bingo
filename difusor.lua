@@ -26,7 +26,7 @@ while jugar do
 	    local request = socket:recv()
 	    if request == "1" then
 	    	jugar = false
-	    	
+	    	os.execute("cls")
 	    	print("Juego terminado tenemos ganador")
 	    end
 	    socket:send("ok")
@@ -38,7 +38,6 @@ while jugar do
 
 end
 
-print("Salii")
 
 socket:close()
 publisher:close()

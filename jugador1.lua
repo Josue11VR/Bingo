@@ -3,6 +3,9 @@ require "cartonBingo"
 
 carton = {{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}}
 array = {}
+acertadas = 0
+
+
 llenarCarton(carton,array)
 imprimirCarton(carton)
 
@@ -27,13 +30,16 @@ while jugar do
 	    print("Bola #: "..bola)
 
 	 
-	    actualizarCarton(carton,bola)
+	    if actualizarCarton(carton,bola)==true then
+	    	acertadas = acertadas +1
+	    end	
+
 	    imprimirCarton(carton)
 
-	    if revisarCarton(carton) == true then
-	    	print("---------------")
-	    	print("| BINGOOOOOOO |")
-	    	print("---------------")
+	    if revisarCarton(acertadas) == true then
+	    	print("   ---------------")
+	    	print("   | BINGOOOOOOO |")
+	    	print("   ---------------")
 			socket:send("1")
 	    else	
 	    	socket:send("0")

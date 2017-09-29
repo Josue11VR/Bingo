@@ -39,36 +39,51 @@ function llenarCarton(m,a)
 			if (i == mitad and j == mitad) then
 				m[i][j] = 0
 			else
-				--m[i][j] = math.random((rangos[j]+1), rangos[j+1])
 				m[i][j] = generarNumero(a,rangos[j]+1,rangos[j+1])
 			end 
 		end
 	end
 end
 
+function seleccionarColumna(b)
+	for i = 2, #rangos do
+		if b<=rangos[i] then 
+			return i-1
+		end	
+	end
+end
 
 function actualizarCarton(c,b)
-	for i=1, #c do
+	bol = tonumber(b)
+	columna = seleccionarColumna(bol)
+    
+
+    for i = 1, #c[1] do
+     	if c[i][columna] == bol then
+			c[i][columna] = -1
+			return true
+		end	
+    end
+
+    return false
+
+
+	--[[for i=1, #c do
 
 		for j=1, #c[1] do
 			if tonumber(c[i][j]) == tonumber(b) then
-				c[i][j] = tonumber(0)
+				c[i][j] = tonumber(-1)
+				return true
 			end	
 		end
 	end
+
+	return false
+	]]--
 end	
 
-function revisarCarton(c)
-	for i=1, #c do
-
-		for j=1, #c[1] do
-			if tonumber(c[i][j]) ~= tonumber(0) then
-				return false
-			end	
-		end
-	end
-
-	return true
+function revisarCarton(a)
+  return a == 24
 end
 
 function imprimirCarton(m)
@@ -83,7 +98,11 @@ function imprimirCarton(m)
 				if m[i][j] == 0 then
 					row = row .. "    "
 				else 
-					row = row .. " 0" .. m[i][j] .. " "
+					if m[i][j]== -1 then
+                      row = row .. " -- "
+                    else 
+						row = row .. " 0" .. m[i][j] .. " "
+				    end
 				end
 			else
 				row = row .. " " .. m[i][j] .. " "

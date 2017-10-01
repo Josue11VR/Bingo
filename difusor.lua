@@ -20,8 +20,7 @@ local subs = 0
 function suscribirJugadores()
   while escuchar do
     local request = socket:recv()
-   -- local comenzar = subscriber:recv()
-
+  
     if request == "play" then
       subs = subs + 1
       print("Jugador conectado")

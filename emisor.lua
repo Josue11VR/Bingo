@@ -73,6 +73,7 @@ while jugar do
 
 end
 
+socket:close()
 subscriber:close()
 publisher:close()
 context:term()

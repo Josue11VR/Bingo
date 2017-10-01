@@ -18,6 +18,10 @@ subscriber:setopt(zmq.SUBSCRIBE, "")
 local socket = context:socket(zmq.REQ)
 socket:connect("tcp://localhost:5557")
 
+
+socket:send("play")
+socket:recv()
+
 local jugar = true
 
 while jugar do

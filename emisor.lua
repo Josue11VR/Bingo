@@ -9,9 +9,15 @@ local subscriber = context:socket(zmq.SUB)
 subscriber:connect("tcp://localhost:5556")
 subscriber:setopt(zmq.SUBSCRIBE, "")
 
+local socket = context:socket(zmq.REQ)
+socket:connect("tcp://localhost:5557")
+
 cantados = {}
 bingo = {}
 random = 75
+
+socket:send("init")
+socket:recv()
 
 math.randomseed(os.time())
 

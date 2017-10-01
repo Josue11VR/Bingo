@@ -37,9 +37,9 @@ function llenarCarton(m,a)
 		--Mueve Columnas (rangos)
 		for j=1, #m[1] do
 			if (i == mitad and j == mitad) then
-				m[i][j] = 0
+				m[j][i] = 0
 			else
-				m[i][j] = generarNumero(a,rangos[j]+1,rangos[j+1])
+				m[j][i] = generarNumero(a,rangos[j]+1,rangos[j+1])
 			end 
 		end
 	end
@@ -57,29 +57,17 @@ function actualizarCarton(c,b)
 	bol = tonumber(b)
 	columna = seleccionarColumna(bol)
     
+    colum_selected = c[columna]
 
-    for i = 1, #c[1] do
-     	if c[i][columna] == bol then
-			c[i][columna] = -1
+    for i = 1, #colum_selected do
+     	if colum_selected[i] == bol then
+			colum_selected[i] = -1
 			return true
 		end	
     end
 
     return false
 
-
-	--[[for i=1, #c do
-
-		for j=1, #c[1] do
-			if tonumber(c[i][j]) == tonumber(b) then
-				c[i][j] = tonumber(-1)
-				return true
-			end	
-		end
-	end
-
-	return false
-	]]--
 end	
 
 function revisarCarton(a)
@@ -91,21 +79,24 @@ function imprimirCarton(m)
 	print(".------------------------.")
 	print("| B    I    N    G    O  |")
 	print("|------------------------|")
+
+	--columnas
 	for i=1, #m do
 		row = "|"
+		--filas
 		for j=1, #m[1] do
-			if m[i][j] < 10 then
-				if m[i][j] == 0 then
+			if m[j][i] < 10 then
+				if m[j][i] == 0 then
 					row = row .. "    "
 				else 
-					if m[i][j]== -1 then
+					if m[j][i]== -1 then
                       row = row .. " -- "
                     else 
-						row = row .. " 0" .. m[i][j] .. " "
+						row = row .. " 0" .. m[j][i] .. " "
 				    end
 				end
 			else
-				row = row .. " " .. m[i][j] .. " "
+				row = row .. " " .. m[j][i] .. " "
 			end
 			row = row .. "|"
 		end

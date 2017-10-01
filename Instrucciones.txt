@@ -1,0 +1,4 @@
+1- Correr proceso difusor.
+2- Correr el proceso jugador (Correrlo por cada jugador que se desee unir al juego).
+3- Correr proceso emisor.
+
